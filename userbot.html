@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <charset="UTF-8">
+  
   <title>Bot Telegram</title>
   <style>
     body {
@@ -47,33 +49,64 @@
       color: #333;
     }
 
-    ul {
-      list-style-type: none;
-    }
-    
+    ol {
+    text-align: center;
+    list-style-position: inside;
+    padding-left: 0;
+  }
+  ol li {
+    text-align: center;
+    margin-bottom: 10px;
+  }
 
+
+  .destra {
+    text-align: right;
+  }
+
+  .class {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  
+  .centro {
+    text-align: center;
+  }
+
+        
   </style>
 </head>
 <body>
+  
+  <header class="destra">
+    <a href="https://github.com/DuPont9029"><img src="https://raw.githubusercontent.com/DuPont9029/equ2g/main/github.ico" class="class destra"></a>
+    <h1 class="centro title">OPENSOLVER</h1>
+  </header> <br> <br>
+
+
+
   <form id="message-form">
     <input type="text" id="token-input" placeholder="Inserisci il token del bot">
     <input type="text" id="chat-id-input" placeholder="Inserisci l'ID della chat">
     <input type="text" id="message-input" placeholder="Inserisci un messaggio"> </br> </br>
     <button type="submit">Invia</button>
-  </form>
 
+
+  </form>
+  <ol style="text-align: center;">
+    <li>Cerca @BotFather e avvia una chat con lui.</li>
+    <li>Scrivi o clicca /newbot per creare un nuovo bot.</li>
+    <li>Segui i passaggi e dai un nome al tuo bot.</li>
+    <li>Copia il token del bot che hai ottenuto e inseriscilo nella web app.</li>
+    <li>Seleziona la chat a cui desideri inviare il messaggio.</li>
+    <li>Clicca sul nome della chat per accedere al profilo.</li>
+    <li>Clicca sui tre puntini in alto e copia l'ID della chat.</li>
+    <li>Inserisci l'ID della chat nella pagina, scrivi il messaggio e invialo!</li>
+  </ol>
   
-    <ul style="text-align: center;">
-      <li>step 1: cerca @BotFather e avvia una chat</li>
-      <li>step 2: scrivi o clicca /newbot</li>
-      <li>step 3: segui i passaggi e dai un nome al tuo bot </li>
-      <li>step 4: copia il token del bot e inseriscilo nella web app</li>
-      <li>step 5: vai sulla chat alla quale vuoi inviare il messaggio</li>
-      <li>step 6: clicca sul nome, ti ritroverai al profilo</li>
-      <li>step 7: clicca sui tre puntini in alto e copia l'id</li>
-      <li>step 8: inseriscilo nella pagina, scrivi il messaggio e invia!</li>
-    </ul>
-        
+
     
 
   <script>

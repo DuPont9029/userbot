@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <charset="UTF-8">
-  
+  <meta charset="utf-8">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
   <title>Bot Telegram</title>
   <style>
+
     body {
       font-family: Arial, sans-serif;
     }
@@ -77,12 +79,62 @@
 
         
   </style>
+
+<script>
+
+  function sendMessage(token, chatId, message) {
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    const data = {
+      chat_id: chatId,
+      text: message
+    };
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Messaggio inviato:', data);
+    })
+    .catch(error => {
+      console.error('Errore durante l\'invio del messaggio:', error);
+    });
+  }
+
+
+
+
+  const form = document.getElementById('message-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const tokenInput = document.getElementById('token-input');
+    const chatIdInput = document.getElementById('chat-id-input');
+    const messageInput = document.getElementById('message-input');
+    const token = tokenInput.value.trim();
+    const chatId = chatIdInput.value.trim();
+    const message = messageInput.value.trim();
+    if (token !== '' && chatId !== '' && message !== '') {
+      sendMessage(token, chatId, message);
+      tokenInput.value = '';
+      chatIdInput.value = '';
+      messageInput.value = '';
+      displayMessage(`Io: ${message}`);
+    }
+  });
+
+  
+</script>
+
 </head>
 <body>
   
   <header class="destra">
     <a href="https://github.com/DuPont9029"><img src="https://raw.githubusercontent.com/DuPont9029/equ2g/main/github.ico" class="class destra"></a>
-    <h1 class="centro title">OPENSOLVER</h1>
+    <h1 class="centro title">USERBOT</h1>
   </header> <br> <br>
 
 
@@ -95,6 +147,7 @@
 
 
   </form>
+
   <ol style="text-align: center;">
     <li>Cerca @BotFather e avvia una chat con lui.</li>
     <li>Scrivi o clicca /newbot per creare un nuovo bot.</li>
@@ -109,54 +162,7 @@
 
     
 
-  <script>
 
-    function sendMessage(token, chatId, message) {
-      const url = `https://api.telegram.org/bot${token}/sendMessage`;
-      const data = {
-        chat_id: chatId,
-        text: message
-      };
-
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Messaggio inviato:', data);
-      })
-      .catch(error => {
-        console.error('Errore durante l\'invio del messaggio:', error);
-      });
-    }
-
-
-
-  
-    const form = document.getElementById('message-form');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const tokenInput = document.getElementById('token-input');
-      const chatIdInput = document.getElementById('chat-id-input');
-      const messageInput = document.getElementById('message-input');
-      const token = tokenInput.value.trim();
-      const chatId = chatIdInput.value.trim();
-      const message = messageInput.value.trim();
-      if (token !== '' && chatId !== '' && message !== '') {
-        sendMessage(token, chatId, message);
-        tokenInput.value = '';
-        chatIdInput.value = '';
-        messageInput.value = '';
-        displayMessage(`Io: ${message}`);
-      }
-    });
-
-    
-  </script>
 </body>
 </html>
  

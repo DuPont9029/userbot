@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bot Telegram</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+      width: 200px;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #message-container {
+      margin-top: 20px;
+    }
+
+    #message-container p {
+      margin: 0 0 10px;
+    }
+
+    .sent {
+      color: #4CAF50;
+    }
+
+    .received {
+      color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+    
+
+  </style>
+</head>
+<body>
+  <form id="message-form">
+    <input type="text" id="token-input" placeholder="Inserisci il token del bot">
+    <input type="text" id="chat-id-input" placeholder="Inserisci l'ID della chat">
+    <input type="text" id="message-input" placeholder="Inserisci un messaggio"> </br> </br>
+    <button type="submit">Invia</button>
+  </form>
+
+  
+    <ul style="text-align: center;">
+      <li>step 1: cerca @BotFather e avvia una chat</li>
+      <li>step 2: scrivi o clicca /newbot</li>
+      <li>step 3: segui i passaggi e dai un nome al tuo bot </li>
+      <li>step 4: copia il token del bot e inseriscilo nella web app</li>
+      <li>step 5: vai sulla chat alla quale vuoi inviare il messaggio</li>
+      <li>step 6: clicca sul nome, ti ritroverai al profilo</li>
+      <li>step 7: clicca sui tre puntini in alto e copia l'id</li>
+      <li>step 8: inseriscilo nella pagina, scrivi il messaggio e invia!</li>
+    </ul>
+        
+    
+
+  <script>
+
+    function sendMessage(token, chatId, message) {
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+      const data = {
+        chat_id: chatId,
+        text: message
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Messaggio inviato:', data);
+      })
+      .catch(error => {
+        console.error('Errore durante l\'invio del messaggio:', error);
+      });
+    }
+
+
+
+  
+    const form = document.getElementById('message-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const tokenInput = document.getElementById('token-input');
+      const chatIdInput = document.getElementById('chat-id-input');
+      const messageInput = document.getElementById('message-input');
+      const token = tokenInput.value.trim();
+      const chatId = chatIdInput.value.trim();
+      const message = messageInput.value.trim();
+      if (token !== '' && chatId !== '' && message !== '') {
+        sendMessage(token, chatId, message);
+        tokenInput.value = '';
+        chatIdInput.value = '';
+        messageInput.value = '';
+        displayMessage(`Io: ${message}`);
+      }
+    });
+
+    
+  </script>
+</body>
+</html>
+ 

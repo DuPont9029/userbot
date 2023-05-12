@@ -80,54 +80,7 @@
         
   </style>
 
-<script>
 
-  function sendMessage(token, chatId, message) {
-    const url = `https://api.telegram.org/bot${token}/sendMessage`;
-    const data = {
-      chat_id: chatId,
-      text: message
-    };
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Messaggio inviato:', data);
-    })
-    .catch(error => {
-      console.error('Errore durante l\'invio del messaggio:', error);
-    });
-  }
-
-
-
-
-  const form = document.getElementById('message-form');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const tokenInput = document.getElementById('token-input');
-    const chatIdInput = document.getElementById('chat-id-input');
-    const messageInput = document.getElementById('message-input');
-    const token = tokenInput.value.trim();
-    const chatId = chatIdInput.value.trim();
-    const message = messageInput.value.trim();
-    if (token !== '' && chatId !== '' && message !== '') {
-      sendMessage(token, chatId, message);
-      tokenInput.value = '';
-      chatIdInput.value = '';
-      messageInput.value = '';
-      displayMessage(`Io: ${message}`);
-    }
-  });
-
-  
-</script>
 
 </head>
 <body>
@@ -159,7 +112,54 @@
     <li>Inserisci l'ID della chat nella pagina, scrivi il messaggio e invialo!</li>
   </ol>
   
+  <script>
 
+    function sendMessage(token, chatId, message) {
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+      const data = {
+        chat_id: chatId,
+        text: message
+      };
+  
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Messaggio inviato:', data);
+      })
+      .catch(error => {
+        console.error('Errore durante l\'invio del messaggio:', error);
+      });
+    }
+  
+  
+  
+  
+    const form = document.getElementById('message-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const tokenInput = document.getElementById('token-input');
+      const chatIdInput = document.getElementById('chat-id-input');
+      const messageInput = document.getElementById('message-input');
+      const token = tokenInput.value.trim();
+      const chatId = chatIdInput.value.trim();
+      const message = messageInput.value.trim();
+      if (token !== '' && chatId !== '' && message !== '') {
+        sendMessage(token, chatId, message);
+        tokenInput.value = '';
+        chatIdInput.value = '';
+        messageInput.value = '';
+        displayMessage(`Io: ${message}`);
+      }
+    });
+  
+    
+  </script>
     
 
 

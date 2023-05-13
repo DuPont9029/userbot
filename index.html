@@ -35,6 +35,16 @@
       cursor: pointer;
     }
 
+    .button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
     #message-container {
       margin-top: 20px;
     }
@@ -108,13 +118,52 @@
     <input type="text" id="token-input" placeholder="Inserisci il token del bot">
     <input type="text" id="chat-id-input" placeholder="Inserisci l'ID della chat">
     <input type="text" id="message-input" placeholder="Inserisci un messaggio"> </br> </br>
-    <button type="submit">Invia</button>
+    <button type="submit">Invia</button> <br> <br> <br> <br> 
+
+
+
+    <h1>Import accounts list from JSON</h1>
+
+    <input type="file" id="fileInput">
+    <input type="text" id="username">
+    <button class="button" onclick="parseJSON()">Carica e Parsifica</button> <br> <br>
+    <h1>chat id: </h1>
+    <div id="output" onclick="copy(this.innerText)"></div>
 
 
   </form>
 
   
   <script>
+
+    function copy(address) {
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(address);
+              
+        // Alert the copied text
+        alert("Hai copiato l'indirizzo: " + address);
+    }
+
+    function parseJSON() {
+        var fileInput = document.getElementById('fileInput');
+        var usernameInput = document.getElementById('username');
+        var file = fileInput.files[0];
+        var username = usernameInput.value;
+        
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            var contents = e.target.result;
+            var json = JSON.parse(contents);
+            
+            // Accesso ai dati parsificati
+            var outputElement = document.getElementById("output");
+            outputElement.innerHTML = json[username];
+            };
+            reader.readAsText(file);
+        }
+    }
+
 
     function sendMessage(token, chatId, message) {
       const url = `https://api.telegram.org/bot${token}/sendMessage`;

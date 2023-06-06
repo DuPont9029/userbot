@@ -145,23 +145,34 @@
     }
 
     function parseJSON() {
-        var fileInput = document.getElementById('fileInput');
-        var usernameInput = document.getElementById('username');
-        var file = fileInput.files[0];
-        var username = usernameInput.value;
-        
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-            var contents = e.target.result;
-            var json = JSON.parse(contents);
-            
-            // Accesso ai dati parsificati
-            var outputElement = document.getElementById("output");
-            outputElement.innerHTML = json[username];
-            };
-            reader.readAsText(file);
+      var fileInput = document.getElementById('fileInput');
+      var usernameInput = document.getElementById('username');
+      var file = fileInput.files[0];
+      var username = usernameInput.value;
+
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var contents = e.target.result;
+          var json = JSON.parse(contents);
+
+          // Accesso ai dati parsificati
+          var outputElement = document.getElementById("output");
+          outputElement.innerHTML = json[username];
+
+          // Salvataggio dei dati nel cookie
+          localStorage.setItem('json', JSON.stringify(json));
+        };
+        reader.readAsText(file);
+      } else {
+        // Recupero dei dati dal cookie
+        var json = JSON.parse(localStorage.getItem('json'));
+
+        if (json) {
+          var outputElement = document.getElementById("output");
+          outputElement.innerHTML = json[username];
         }
+      }
     }
 
 
